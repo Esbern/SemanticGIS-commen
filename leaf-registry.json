@@ -13,7 +13,7 @@
       "id": "administrative-units",
       "file": "administrative-units.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "aquaculture-sites",
@@ -43,7 +43,7 @@
       "id": "buildings",
       "file": "buildings.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "business-financials",
@@ -55,7 +55,7 @@
       "id": "business-locations",
       "file": "business-locations.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "cadastral-parcels",
@@ -97,7 +97,7 @@
       "id": "energy-infrastructure",
       "file": "energy-infrastructure.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "environmental-noise",
@@ -133,13 +133,13 @@
       "id": "forest-management",
       "file": "forest-management.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "freshwater-bodies",
       "file": "freshwater-bodies.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "geodetic-control-points",
@@ -151,7 +151,7 @@
       "id": "geographical-names",
       "file": "geographical-names.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "geological-strata",
@@ -181,7 +181,7 @@
       "id": "habitat-extent",
       "file": "habitat-extent.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "historical-map-sheets",
@@ -199,7 +199,7 @@
       "id": "land-use-agriculture",
       "file": "land-use-agriculture.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "marine-spatial-infrastructure",
@@ -223,7 +223,7 @@
       "id": "nature-protection-areas",
       "file": "nature-protection-areas.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "nautical-traffic",
@@ -247,7 +247,7 @@
       "id": "population",
       "file": "population.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     },
     {
       "id": "property-valuation",
@@ -313,7 +313,7 @@
       "id": "transport-networks",
       "file": "transport-networks.md",
       "status_dk": "exists",
-      "status_org": "stub"
+      "status_org": "exists"
     }
   ]
 }
