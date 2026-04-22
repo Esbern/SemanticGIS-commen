@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const filesToDeletePath = '/Users/holmes/local_dev/semanticGIS/DanishData/content/assets/lookup/files-to-delete.json';
+const filesToDeletePath = '/Users/holmes/local_dev/SemanticGIS/dk/content/assets/lookup/files-to-delete.json';
 
 // Load the list
 const filesToDelete = JSON.parse(fs.readFileSync(filesToDeletePath, 'utf-8'));

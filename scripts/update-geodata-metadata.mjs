@@ -1,7 +1,7 @@
 import fs from 'fs';
 
-const geodataPath = '/Users/holmes/local_dev/semanticGIS/geodata_full.json';
-const discardManifestPath = '/Users/holmes/local_dev/semanticGIS/DanishData/content/assets/lookup/discard-manifest.json';
+const geodataPath = '/Users/holmes/local_dev/SemanticGIS/geodata_full.json';
+const discardManifestPath = '/Users/holmes/local_dev/SemanticGIS/dk/content/assets/lookup/discard-manifest.json';
 
 const duplicateOwnerGroups = [
   {

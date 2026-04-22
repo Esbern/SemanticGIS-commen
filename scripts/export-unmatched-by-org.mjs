@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const unmatchedPath = '/Users/holmes/local_dev/semanticGIS/DanishData/content/assets/lookup/datasets-remaining-unmatched.json';
+const unmatchedPath = '/Users/holmes/local_dev/SemanticGIS/dk/content/assets/lookup/datasets-remaining-unmatched.json';
 
 // Load unmatched data
 const data = JSON.parse(fs.readFileSync(unmatchedPath, 'utf-8'));
@@ -47,7 +47,7 @@ for (const [org, datasets] of sorted) {
 }
 
 fs.writeFileSync(
-  '/Users/holmes/local_dev/semanticGIS/DanishData/content/assets/lookup/unmatched-datasets-by-organization.json',
+  '/Users/holmes/local_dev/SemanticGIS/dk/content/assets/lookup/unmatched-datasets-by-organization.json',
   JSON.stringify(summary, null, 2)
 );
 

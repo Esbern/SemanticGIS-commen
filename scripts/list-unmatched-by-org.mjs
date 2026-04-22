@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const unmatchedPath = '/Users/holmes/local_dev/semanticGIS/DanishData/content/assets/lookup/datasets-remaining-unmatched.json';
+const unmatchedPath = '/Users/holmes/local_dev/SemanticGIS/dk/content/assets/lookup/datasets-remaining-unmatched.json';
 
 // Load unmatched data
 const data = JSON.parse(fs.readFileSync(unmatchedPath, 'utf-8'));

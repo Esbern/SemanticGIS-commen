@@ -9,13 +9,13 @@ const __dirname = path.dirname(__filename)
 const repoRoot = path.resolve(__dirname, "..")
 
 const indexPaths = [
-  path.join(repoRoot, "DanishData", "content", "assets", "sphere-index.v1.json"),
-  path.join(repoRoot, "DanishData", "content", "assets", "sphere-index.v1 copy.json"),
+  path.join(repoRoot, "dk", "content", "assets", "sphere-index.v1.json"),
+  path.join(repoRoot, "dk", "content", "assets", "sphere-index.v1 copy.json"),
 ]
 
 const subsphereMap = new Map([
   ["socio_technical_ict", "socio_technical_ict_flows"],
-  ["toposphere_imagery", "toposphere_imagery_evidence"],
+  ["toposphere_imagery", "toposphere_remote_sensed_observations"],
   ["Topography", "toposphere_topography_bathymetry"],
   ["landuselancover_classified_products", "socio_technical_perception_thematics"],
   ["landuselancover_change_monitoring", "socio_technical_perception_thematics"],
@@ -48,13 +48,16 @@ const requiredThreads = [
       "Business clustering contributes to interpreted thematic layers such as retail corridors, employment zones, and functional districts.",
   },
   {
-    id: "orthoimagery-to-imagery-evidence",
+    id: "orthoimagery-to-remote-sensed-observations",
     leaf: "orthoimagery",
-    twig: "toposphere_imagery_evidence",
-    relation_type: "cross_twig_relevance",
-    question: "How does orthoimagery function as evidence?",
+    twig: "toposphere_remote_sensed_observations",
+    source: "orthoimagery",
+    predicate: "is_primary_evidence_for",
+    target: "toposphere_remote_sensed_observations",
+    relation_type: "primary_twig_membership",
+    question: "How does orthoimagery function as remote-sensed evidence?",
     rationale:
-      "Orthoimagery provides direct observational evidence of surface state prior to thematic interpretation.",
+      "Orthoimagery is a direct observational record of the Earth's surface — the canonical data type for the Remote Sensed Observations twig.",
   },
   {
     id: "orthoimagery-to-perception-thematics",
@@ -109,7 +112,8 @@ async function updateIndex(indexPath) {
 
         if (sphere.id === "toposphere") {
           sphere.subspheres = dedupe((sphere.subspheres ?? []).map((entry) => replaceValue(entry)))
-          sphere.description = "Terrain, bathymetry, surface properties, and imagery evidence"
+          sphere.description =
+            "Terrain, bathymetry, surface properties, remote-sensed observations, and coordinate reference systems"
         }
 
         sphere.subspheres = dedupe((sphere.subspheres ?? []).map((entry) => replaceValue(entry)))
@@ -136,7 +140,7 @@ async function updateIndex(indexPath) {
         const existing = Array.isArray(next.threads) ? next.threads : []
         next.threads = dedupe([
           ...existing,
-          "orthoimagery-to-imagery-evidence",
+          "orthoimagery-to-remote-sensed-observations",
           "orthoimagery-to-perception-thematics",
         ])
       }

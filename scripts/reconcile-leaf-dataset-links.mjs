@@ -9,10 +9,10 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const repoRoot = path.resolve(__dirname, "..")
 
-const leavesDir = path.join(repoRoot, "DanishData", "content", "Leaves")
-const ownerDir = path.join(repoRoot, "DanishData", "content", "Datasets by Owner")
-const collectionDir = path.join(repoRoot, "DanishData", "content", "Datasets by Collection")
-const outDir = path.join(repoRoot, "DanishData", "content", "assets", "lookup")
+const leavesDir = path.join(repoRoot, "dk", "content", "Leaves")
+const ownerDir = path.join(repoRoot, "dk", "content", "Datasets by Owner")
+const collectionDir = path.join(repoRoot, "dk", "content", "Datasets by Collection")
+const outDir = path.join(repoRoot, "dk", "content", "assets", "lookup")
 
 const outJson = path.join(outDir, "leaf-realisations-link-audit.v1.json")
 const outMd = path.join(outDir, "leaf-realisations-link-audit.md")
@@ -93,7 +93,7 @@ async function loadDatasets() {
     datasets.push({
       group: "owner",
       title: String(title),
-      relPath: path.relative(path.join(repoRoot, "DanishData", "content"), filePath).replace(/\\/g, "/"),
+      relPath: path.relative(path.join(repoRoot, "dk", "content"), filePath).replace(/\\/g, "/"),
     })
   }
 
@@ -108,7 +108,7 @@ async function loadDatasets() {
     datasets.push({
       group: "collection",
       title: String(title),
-      relPath: path.relative(path.join(repoRoot, "DanishData", "content"), filePath).replace(/\\/g, "/"),
+      relPath: path.relative(path.join(repoRoot, "dk", "content"), filePath).replace(/\\/g, "/"),
     })
   }
 
@@ -311,7 +311,7 @@ async function main() {
     const leafEntry = {
       slug: path.basename(filePath, ".md"),
       title: String(parsed.data?.title || path.basename(filePath, ".md")),
-      path: path.relative(path.join(repoRoot, "DanishData", "content"), filePath).replace(/\\/g, "/"),
+      path: path.relative(path.join(repoRoot, "dk", "content"), filePath).replace(/\\/g, "/"),
       matched,
       unmatched,
     }

@@ -9,13 +9,13 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const repoRoot = path.resolve(__dirname, "..")
 
-const leavesDir = path.join(repoRoot, "DanishData", "content", "Leaves")
+const leavesDir = path.join(repoRoot, "dk", "content", "Leaves")
 const miljoeportalDatasetsPath = path.join(repoRoot, "data", "miljoeportal_datasets.json")
 const miljoeportalCollectionsPath = path.join(repoRoot, "data", "miljoeportal_dataset_collections.json")
 const cswPath = path.join(repoRoot, "data", "csw_full.xml")
 const outJsonPath = path.join(
   repoRoot,
-  "DanishData",
+  "dk",
   "content",
   "assets",
   "lookup",
@@ -23,7 +23,7 @@ const outJsonPath = path.join(
 )
 const outMarkdownPath = path.join(
   repoRoot,
-  "DanishData",
+  "dk",
   "content",
   "assets",
   "lookup",

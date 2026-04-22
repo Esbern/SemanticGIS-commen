@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
-const repoRoot = '/Users/holmes/local_dev/semanticGIS';
+const repoRoot = '/Users/holmes/local_dev/SemanticGIS';
 const dataPath = path.join(repoRoot, 'geodata_full.json');
-const unmatchedPath = path.join(repoRoot, 'DanishData/content/assets/lookup/datasets-remaining-unmatched.json');
-const outputDir = path.join(repoRoot, 'DanishData/content/assets/lookup');
+const unmatchedPath = path.join(repoRoot, 'dk/content/assets/lookup/datasets-remaining-unmatched.json');
+const outputDir = path.join(repoRoot, 'dk/content/assets/lookup');
 
 // Load data
 console.log('Loading data...');
@@ -101,7 +101,7 @@ fs.writeFileSync(
 // Write deletion list (for cleanup script)
 const filestoDelete = [];
 for (const dataset of [...discardedDatasets.inspire_services, ...discardedDatasets.greenland]) {
-  filestoDelete.push(path.join(repoRoot, 'DanishData/content', dataset.relPath));
+  filestoDelete.push(path.join(repoRoot, 'dk/content', dataset.relPath));
 }
 
 fs.writeFileSync(

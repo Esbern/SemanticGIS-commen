@@ -2,10 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const repoRoot = '/Users/holmes/local_dev/semanticGIS';
-const leavesDir = path.join(repoRoot, 'DanishData/content/Leaves');
-const unmatchedPath = path.join(repoRoot, 'DanishData/content/assets/lookup/datasets-unmatched-by-leaf.v1.json');
-const outputDir = path.join(repoRoot, 'DanishData/content/assets/lookup');
+const repoRoot = '/Users/holmes/local_dev/SemanticGIS';
+const leavesDir = path.join(repoRoot, 'dk/content/Leaves');
+const unmatchedPath = path.join(repoRoot, 'dk/content/assets/lookup/datasets-unmatched-by-leaf.v1.json');
+const outputDir = path.join(repoRoot, 'dk/content/assets/lookup');
 
 // Load unmatched datasets
 const unmatchedData = JSON.parse(fs.readFileSync(unmatchedPath, 'utf-8'));

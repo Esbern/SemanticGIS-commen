@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const leavesDir = '/Users/holmes/local_dev/semanticGIS/DanishData/content/Leaves';
+const leavesDir = '/Users/holmes/local_dev/SemanticGIS/dk/content/Leaves';
 
 // Define new leaves based on gap analysis recommendations
 const newLeaves = [

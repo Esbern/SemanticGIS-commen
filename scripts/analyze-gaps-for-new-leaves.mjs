@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const repoRoot = '/Users/holmes/local_dev/semanticGIS';
-const outputDir = path.join(repoRoot, 'DanishData/content/assets/lookup');
+const repoRoot = '/Users/holmes/local_dev/SemanticGIS';
+const outputDir = path.join(repoRoot, 'dk/content/assets/lookup');
 const matchedPath = path.join(outputDir, 'datasets-matched-to-leaves.json');
 const remainingPath = path.join(outputDir, 'datasets-remaining-unmatched.json');
 

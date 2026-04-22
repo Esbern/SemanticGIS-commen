@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const repoRoot = path.resolve(__dirname, "..")
-const contentRoot = path.join(repoRoot, "DanishData", "content")
+const contentRoot = path.join(repoRoot, "dk", "content")
 const leavesDir = path.join(contentRoot, "Leaves")
 
 function hasOwn(obj, key) {

@@ -3,7 +3,7 @@
 import fs from "node:fs"
 import path from "node:path"
 
-const root = path.join(process.cwd(), "DanishData/content")
+const root = path.join(process.cwd(), "dk/content")
 const files = []
 
 function walk(dir) {
