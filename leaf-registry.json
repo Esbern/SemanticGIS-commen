@@ -1,0 +1,319 @@
+{
+  "registry_version": "1.0.0",
+  "description": "Canonical list of leaf IDs shared across semanticgis.dk and semanticgis.org. Leaf filenames are the canonical identity. Both hubs must carry every registered leaf (even as draft: true stubs). Realisations and geometry representations are hub-local.",
+  "sync_rule": "When a new leaf is created on either hub, add it here and create a stub on the other hub.",
+  "leaves": [
+    {
+      "id": "addresses",
+      "file": "addresses.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "administrative-units",
+      "file": "administrative-units.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "aquaculture-sites",
+      "file": "aquaculture-sites.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "atmospheric-deposition-emissions",
+      "file": "atmospheric-deposition-emissions.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "bathing-water-quality",
+      "file": "bathing-water-quality.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "biodiversity-priority-indicators",
+      "file": "biodiversity-priority-indicators.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "buildings",
+      "file": "buildings.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "business-financials",
+      "file": "business-financials.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "business-locations",
+      "file": "business-locations.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "cadastral-parcels",
+      "file": "cadastral-parcels.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "coastal-erosion-risk",
+      "file": "coastal-erosion-risk.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "corporate-ownership",
+      "file": "corporate-ownership.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "drinking-water-protection",
+      "file": "drinking-water-protection.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "economic-activities",
+      "file": "economic-activities.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "elevation",
+      "file": "elevation.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "energy-infrastructure",
+      "file": "energy-infrastructure.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "environmental-noise",
+      "file": "environmental-noise.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "firms",
+      "file": "firms.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "fisheries-intensity",
+      "file": "fisheries-intensity.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "fisheries-management",
+      "file": "fisheries-management.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "flood-hazard-inundation",
+      "file": "flood-hazard-inundation.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "forest-management",
+      "file": "forest-management.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "freshwater-bodies",
+      "file": "freshwater-bodies.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "geodetic-control-points",
+      "file": "geodetic-control-points.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "geographical-names",
+      "file": "geographical-names.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "geological-strata",
+      "file": "geological-strata.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "groundwater-bodies",
+      "file": "groundwater-bodies.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "groundwater-chemistry",
+      "file": "groundwater-chemistry.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "habitat-condition",
+      "file": "habitat-condition.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "habitat-extent",
+      "file": "habitat-extent.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "historical-map-sheets",
+      "file": "historical-map-sheets.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "hydrological-basin-delineations",
+      "file": "hydrological-basin-delineations.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "land-use-agriculture",
+      "file": "land-use-agriculture.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "marine-spatial-infrastructure",
+      "file": "marine-spatial-infrastructure.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "marine-waters",
+      "file": "marine-waters.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "natura-2000-habitats",
+      "file": "natura-2000-habitats.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "nature-protection-areas",
+      "file": "nature-protection-areas.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "nautical-traffic",
+      "file": "nautical-traffic.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "orthoimagery",
+      "file": "orthoimagery.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "planning-zoning-decisions",
+      "file": "planning-zoning-decisions.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "population",
+      "file": "population.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "property-valuation",
+      "file": "property-valuation.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "protected-water-use-zones",
+      "file": "protected-water-use-zones.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "services",
+      "file": "services.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "soil-properties",
+      "file": "soil-properties.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "spatial-planning-decisions",
+      "file": "spatial-planning-decisions.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "species-conservation-concern",
+      "file": "species-conservation-concern.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "species-observations",
+      "file": "species-observations.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "spill-pollution-incidents",
+      "file": "spill-pollution-incidents.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "subsurface-freshwater",
+      "file": "subsurface-freshwater.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "surface-flow-systems",
+      "file": "surface-flow-systems.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    },
+    {
+      "id": "transport-networks",
+      "file": "transport-networks.md",
+      "status_dk": "exists",
+      "status_org": "stub"
+    }
+  ]
+}
