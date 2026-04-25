@@ -10,7 +10,7 @@ const repoRoot = path.resolve(__dirname, "..")
 
 const indexPaths = [
   path.join(repoRoot, "dk", "content", "assets", "sphere-index.v1.json"),
-  path.join(repoRoot, "dk", "content", "assets", "sphere-index.v1 copy.json"),
+
 ]
 
 const subsphereMap = new Map([

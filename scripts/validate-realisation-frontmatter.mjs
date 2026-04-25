@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename)
 
 const repoRoot = path.resolve(__dirname, "..", "..")
 const contentRoot = path.join(repoRoot, "dk", "content")
-const leavesDir = path.join(contentRoot, "Leaves")
+const realisationsDir = path.join(contentRoot, "Realisations")
 
 function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key)
@@ -71,51 +71,17 @@ function expectStringArrayField(data, fieldName, errors, { minItems = 0 } = {}) 
   return normalized
 }
 
-function expectObjectField(data, fieldName, errors) {
-  if (!hasOwn(data, fieldName)) {
-    errors.push(`Missing required field: ${fieldName}`)
-    return null
-  }
-
-  const value = data[fieldName]
-  if (!value || typeof value !== "object" || Array.isArray(value)) {
-    errors.push(`Field must be an object: ${fieldName}`)
-    return null
-  }
-
-  return value
-}
-
-function validateLeafFrontmatter(data, filePath) {
+function validateRealisationFrontmatter(data, filePath) {
   const errors = []
   const normalizedType = normalizeString(data.type)
-  if (normalizedType !== "leaf") {
-    errors.push(`Field must be string 'leaf': type`)
+  if (normalizedType !== "realisation") {
+    errors.push(`Field must be string 'realisation': type`)
   }
 
   const title = expectStringField(data, "title", errors)
-  const sphere = expectStringField(data, "sphere", errors)
-  const subsphere = expectStringField(data, "subsphere", errors)
-  const question = expectStringField(data, "question", errors)
-
-  const threads = expectStringArrayField(data, "threads", errors)
+  const leaf = expectStringField(data, "leaf", errors)
+  const dataset = expectStringField(data, "dataset", errors)
   const tags = expectStringArrayField(data, "tags", errors)
-
-  const twigMembership = hasOwn(data, "twig_membership")
-    ? expectStringArrayField(data, "twig_membership", errors)
-    : undefined
-
-  const primaryLens = hasOwn(data, "primary_lens")
-    ? expectStringField(data, "primary_lens", errors, { optional: true })
-    : undefined
-
-  const flowMode = hasOwn(data, "flow_mode")
-    ? expectStringField(data, "flow_mode", errors, { optional: true })
-    : undefined
-
-  const temporalMmu = hasOwn(data, "temporal_mmu")
-    ? expectStringField(data, "temporal_mmu", errors, { optional: true })
-    : undefined
 
   if (errors.length > 0) {
     const relPath = path.relative(repoRoot, filePath)
@@ -130,50 +96,54 @@ function validateLeafFrontmatter(data, filePath) {
     ok: true,
     value: {
       title,
-      sphere,
-      subsphere,
-      question,
-      threads,
+      leaf,
+      dataset,
       tags,
-      twig_membership: twigMembership,
-      primary_lens: primaryLens,
-      flow_mode: flowMode,
-      temporal_mmu: temporalMmu,
     },
   }
 }
 
-export async function validateLeafFrontmatterStrict(options = {}) {
-  const targetLeavesDir = options.leavesDir ?? leavesDir
-  const dirEntries = await fs.readdir(targetLeavesDir, { withFileTypes: true })
-  const leafPaths = dirEntries
+export async function validateRealisationFrontmatterStrict(options = {}) {
+  const targetRealisationsDir = options.realisationsDir ?? realisationsDir
+  
+  let dirEntries = []
+  try {
+    dirEntries = await fs.readdir(targetRealisationsDir, { withFileTypes: true })
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      return { validatedRealisations: [] }
+    }
+    throw err
+  }
+
+  const realPaths = dirEntries
     .filter((entry) => entry.isFile() && entry.name.endsWith(".md") && entry.name !== "index.md")
-    .map((entry) => path.join(targetLeavesDir, entry.name))
+    .map((entry) => path.join(targetRealisationsDir, entry.name))
     .sort((left, right) => left.localeCompare(right))
 
-  const validatedLeaves = []
+  const validatedRealisations = []
   const problems = []
 
-  for (const filePath of leafPaths) {
+  for (const filePath of realPaths) {
     const raw = await fs.readFile(filePath, "utf8")
     const { data } = matter(raw)
-    const result = validateLeafFrontmatter(data, filePath)
+    const result = validateRealisationFrontmatter(data, filePath)
 
     if (!result.ok) {
       problems.push(result)
       continue
     }
 
-    validatedLeaves.push({
+    validatedRealisations.push({
       filePath,
-      leafId: path.basename(filePath, ".md"),
+      realisationId: path.basename(filePath, ".md"),
       data: result.value,
     })
   }
 
   if (problems.length > 0) {
     const lines = [
-      `Leaf frontmatter validation failed in ${problems.length} file(s):`,
+      `Realisation frontmatter validation failed in ${problems.length} file(s):`,
       ...problems.flatMap((problem) => [
         `- ${problem.relPath}`,
         ...problem.errors.map((entry) => `  - ${entry}`),
@@ -183,12 +153,12 @@ export async function validateLeafFrontmatterStrict(options = {}) {
     throw new Error(lines.join("\n"))
   }
 
-  return { validatedLeaves }
+  return { validatedRealisations }
 }
 
 async function main() {
-  const { validatedLeaves } = await validateLeafFrontmatterStrict()
-  console.log(`Leaf frontmatter is valid in ${validatedLeaves.length} files`) 
+  const { validatedRealisations } = await validateRealisationFrontmatterStrict()
+  console.log(`Realisation frontmatter is valid in ${validatedRealisations.length} files`) 
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {

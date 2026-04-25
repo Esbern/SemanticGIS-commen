@@ -4,14 +4,12 @@ import fs from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { validateLeafFrontmatterStrict } from "./validate-leaf-frontmatter.mjs"
+import { validateRealisationFrontmatterStrict } from "./validate-realisation-frontmatter.mjs"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const repoRoot = path.resolve(__dirname, "..")
-const contentRoot = path.join(repoRoot, "dk", "content")
-const leavesDir = path.join(contentRoot, "Leaves")
-const indexPath = path.join(contentRoot, "assets", "sphere-index.v1.json")
+const repoRoot = path.resolve(__dirname, "..", "..")
 
 const args = new Set(process.argv.slice(2))
 const checkOnly = args.has("--check")
@@ -63,6 +61,24 @@ function stableLeafOrder(existingLeaves, rebuiltLeaves) {
   })
 }
 
+function stableRealisationOrder(existingRealisations, rebuiltRealisations) {
+  const existingOrder = new Map((existingRealisations ?? []).map((rel, index) => [rel.id, index]))
+
+  return [...rebuiltRealisations].sort((left, right) => {
+    const leftIndex = existingOrder.get(left.id)
+    const rightIndex = existingOrder.get(right.id)
+
+    if (leftIndex != null && rightIndex != null) {
+      return leftIndex - rightIndex
+    }
+
+    if (leftIndex != null) return -1
+    if (rightIndex != null) return 1
+
+    return left.id.localeCompare(right.id)
+  })
+}
+
 function stableThreadOrder(existingThreads, referencedThreadIds) {
   const wanted = new Set(referencedThreadIds)
   const ordered = existingThreads.filter((thread) => wanted.has(thread.id))
@@ -83,7 +99,7 @@ async function loadExistingIndex() {
   return JSON.parse(raw)
 }
 
-async function rebuildLeavesAndThreads(existingIndex) {
+async function rebuildLeavesAndThreads(existingIndex, leavesDir) {
   const { validatedLeaves } = await validateLeafFrontmatterStrict({ leavesDir })
   const rebuiltLeaves = []
   const referencedThreadIds = []
@@ -96,18 +112,12 @@ async function rebuildLeavesAndThreads(existingIndex) {
     const question = data.question
     const sphere = data.sphere
     const subsphere = data.subsphere
-    const realisations = toArray(data.realisations)
     const threads = toArray(data.threads)
     const tags = toArray(data.tags)
     const twigMembership = toArray(data.twig_membership)
     const primaryLens = data.primary_lens
     const flowMode = data.flow_mode
     const temporalMmu = data.temporal_mmu
-    const entities = toArray(data.entities)
-    const keyAttributes = toArray(data.key_attributes)
-    const services = toObject(data.services)
-    const primaryCollection = data.primary_collection
-    const primaryCollectionPath = data.primary_collection_path
 
     const rebuiltLeaf = {
       id: leafId,
@@ -117,19 +127,7 @@ async function rebuildLeavesAndThreads(existingIndex) {
       subsphere,
     }
 
-    if (primaryCollection) {
-      rebuiltLeaf.primary_collection = primaryCollection
-    }
-
-    if (primaryCollectionPath) {
-      rebuiltLeaf.primary_collection_path = primaryCollectionPath
-    }
-
-    rebuiltLeaf.realisations = realisations
     rebuiltLeaf.question = question
-    rebuiltLeaf.entities = entities
-    rebuiltLeaf.key_attributes = keyAttributes
-    rebuiltLeaf.services = services
     rebuiltLeaf.tags = tags
 
     if (twigMembership.length > 0) {
@@ -166,14 +164,47 @@ async function rebuildLeavesAndThreads(existingIndex) {
   return { orderedLeaves, orderedThreads }
 }
 
-async function main() {
-  const existingIndex = await loadExistingIndex()
-  const { orderedLeaves, orderedThreads } = await rebuildLeavesAndThreads(existingIndex)
+async function rebuildRealisations(existingIndex, realisationsDir) {
+  const { validatedRealisations } = await validateRealisationFrontmatterStrict({ realisationsDir })
+  const rebuiltRealisations = []
+
+  for (const entry of validatedRealisations) {
+    const { realisationId, data } = entry
+    rebuiltRealisations.push({
+      id: realisationId,
+      title: data.title,
+      path: `/Realisations/${realisationId}`,
+      leaf: data.leaf,
+      dataset: data.dataset,
+      tags: toArray(data.tags),
+    })
+  }
+
+  return stableRealisationOrder(existingIndex.realisations, rebuiltRealisations)
+}
+
+async function processSite(siteName) {
+  const contentRoot = path.join(repoRoot, siteName, "content")
+  const leavesDir = path.join(contentRoot, "Leaves")
+  const realisationsDir = path.join(contentRoot, "Realisations")
+  const indexPath = path.join(contentRoot, "assets", "sphere-index.v1.json")
+
+  const raw = await fs.readFile(indexPath, "utf8").catch(() => null)
+  if (!raw) {
+    console.log(`Skipping ${siteName}: index not found at ${indexPath}`)
+    return
+  }
+  const existingIndex = JSON.parse(raw)
+
+  const { orderedLeaves, orderedThreads } = await rebuildLeavesAndThreads(existingIndex, leavesDir)
+  const orderedRealisations = await rebuildRealisations(existingIndex, realisationsDir)
 
   const rebuiltIndex = {
     ...existingIndex,
+    version: "0.3.0",
     generated: isoDateToday(),
     leaves: orderedLeaves,
+    realisations: orderedRealisations,
     threads: orderedThreads,
   }
 
@@ -182,17 +213,21 @@ async function main() {
 
   if (checkOnly) {
     if (nextJson !== currentJson) {
-      console.error("sphere-index.v1.json is out of date relative to the notes")
+      console.error(`sphere-index.v1.json for ${siteName} is out of date relative to the notes`)
       process.exitCode = 1
       return
     }
-
-    console.log("sphere-index.v1.json is up to date")
+    console.log(`sphere-index.v1.json for ${siteName} is up to date`)
     return
   }
 
   await fs.writeFile(indexPath, nextJson, "utf8")
   console.log(`Rebuilt ${path.relative(repoRoot, indexPath)} from ${orderedLeaves.length} leaf notes`) 
+}
+
+async function main() {
+  await processSite("dk")
+  await processSite("org")
 }
 
 main().catch((error) => {
